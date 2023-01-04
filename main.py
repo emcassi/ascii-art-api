@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from ascii_gen import convert_image_to_ascii
+import os
 
 app = FastAPI()
 
@@ -39,6 +40,6 @@ async def upload(file: UploadFile = File(...)):
     finally:
         file.file.close()
         ascii_text = convert_image_to_ascii(file.filename)
-        print(ascii_text)
+        os.remove(file.filename)
 
-    return {"message": f"Successfully uploaded {file.filename}", "ascii": ascii_text}
+    return {"message": "Successful", "ascii": ascii_text}

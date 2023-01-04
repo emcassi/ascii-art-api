@@ -10,9 +10,10 @@ def convert_image_to_ascii(file):
         return
 
     print(im.size)
-    im.resize((round(im.size[0] * 0.25), round(im.size[1] * 0.25)))
+    max_size = (256, 256)
+    im.thumbnail(max_size)
     print("Resized: ", im.size)
-    img = im.convert('RGB')
+    im = im.convert('RGB')
 
     pixels = [[0]*im.size[1] for i in range(im.size[0])]
     rgb = [[0]*im.size[1] for i in range(im.size[0])]
